@@ -1,0 +1,46 @@
+# Build outputs and local tools
+**/bin/
+**/obj/
+artifacts/
+.vs/
+.idea/
+.nuget/
+.dotnet/
+node_modules/
+TestResults/
+*.user
+*.suo
+
+# Never publish machine data, diagnostics, exports or credentials
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.csv
+*.log
+*.pow
+*.pfx
+*.p12
+*.key
+.env
+.env.*
+diagnosticos/
+exportaciones/
+WebView/
+latest.json
+diagnostics.json
+diagnostics-error.txt
+diagnostic-run-error.txt
+last-diagnostic.json
+preferences.json
+installation.txt
+diagnostic-version.txt
+storage-test-*/
+
+# Upstream installer is fetched on demand; do not redistribute in Git
+vendor/*.exe
+vendor/*.dll
+downloads/
+
+# Local browser tooling
+.playwright-mcp/

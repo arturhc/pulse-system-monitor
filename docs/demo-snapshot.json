@@ -1,0 +1,27 @@
+{
+  "time": "2026-01-01T12:00:00-06:00",
+  "cpu": 24,
+  "memoryUsed": 8589934592,
+  "memoryTotal": 17179869184,
+  "diskActive": 8,
+  "diskRead": 12582912,
+  "diskWrite": 3145728,
+  "diskUsed": 214748364800,
+  "diskTotal": 536870912000,
+  "gpu": 16,
+  "battery": 78,
+  "plugged": true,
+  "batterySeconds": null,
+  "admin": true,
+  "pawnIoInstalled": true,
+  "cpuName": "Procesador de ejemplo · 8 núcleos",
+  "gpuName": "GPU de demostración",
+  "diskName": "SSD NVMe de demostración",
+  "machine": { "manufacturer": "Demo", "model": "Windows PC", "cores": 8, "threads": 16 },
+  "batteryQuality": { "designWh": 56, "fullWh": 49.5, "healthPercent": 88.4, "wearPercent": 11.6, "cycles": 142, "chargeWatts": 9, "assessment": "Capacidad conservada" },
+  "sensors": [
+    { "id": "/intelcpu/0/temperature/0", "hardware": "CPU de ejemplo", "name": "CPU Package", "kind": "Temperature", "value": 57 },
+    { "id": "/nvme/0/temperature/0", "hardware": "SSD de ejemplo", "name": "Composite Temperature", "kind": "Temperature", "value": 42 }
+  ],
+  "sensorError": null
+}

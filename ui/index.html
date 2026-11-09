@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'">
+<title>Pulse · Monitor del sistema</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="accents.css"><link rel="stylesheet" href="features.css">
+</head>
+<body>
+<header id="drag"><div class="brand"><svg width="25" height="25" viewBox="0 0 28 28" fill="none"><rect x="1" y="1" width="26" height="26" rx="8" stroke="#53695b"/><path d="M4 15h5l3-7 4 13 3-6h5" stroke="#c5f8a6" stroke-width="1.8" stroke-linejoin="round"/></svg><strong>pulse<span> / </span></strong><span class="edition">SYSTEM MONITOR</span></div><div class="window-actions"><button id="pin" title="Siempre visible" aria-label="Siempre visible"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m14 3 7 7-4 1-4 5-5-5 5-4 1-4Z M10 14l-7 7"/></svg></button><button id="hide" title="Ocultar junto al reloj" aria-label="Ocultar junto al reloj">−</button><button id="quit" title="Cerrar Pulse" aria-label="Cerrar Pulse">×</button></div></header>
+<main>
+<section class="overview"><div><div class="eyebrow">TU EQUIPO, EN TIEMPO REAL</div><h1>Todo bajo control<span>.</span></h1></div><div class="live"><i></i><span id="connection">Conectando</span></div></section>
+<nav class="tabs" aria-label="Vistas del monitor"><button id="tabLive" class="selected">En vivo</button><button id="tabHistory">Historial</button><button id="tabDiagnostics">Diagnósticos</button></nav>
+<div class="layout"><div class="dashboard">
+<div class="cards">
+<button class="card" data-key="cpu"><div class="card-head"><span class="symbol">◈</span><span>CPU</span><span class="tag" id="cpuTemp">— °C</span></div><div class="metric"><span id="cpu">—</span><small>%</small></div><div class="sub" id="cpuSub">Leyendo procesador</div><svg class="chart" id="cpuChart" viewBox="0 0 180 30" preserveAspectRatio="none" aria-label="Historial de CPU"></svg></button>
+<button class="card" data-key="ram"><div class="card-head"><span class="symbol">▥</span><span>RAM</span><span class="tag">MEMORIA</span></div><div class="metric"><span id="ram">—</span><small>%</small></div><div class="sub" id="ramSub">Leyendo memoria</div><div class="segments" id="ramSegments"></div></button>
+<button class="card" data-key="ssd"><div class="card-head"><span class="symbol">▤</span><span>SSD</span><span class="tag" id="diskTemp">— °C</span></div><div class="metric"><span id="ssd">—</span><small>% activo</small></div><div class="sub" id="diskSub">Leyendo almacenamiento</div><div class="transfer"><span id="read">↓ —</span><span id="write">↑ —</span></div></button>
+<button class="card" data-key="gpu"><div class="card-head"><span class="symbol">▧</span><span>GPU</span><span class="tag" id="gpuTemp">— °C</span></div><div class="metric"><span id="gpu">—</span><small>%</small></div><div class="sub" id="gpuSub">Leyendo gráficos</div><svg class="chart" id="gpuChart" viewBox="0 0 180 30" preserveAspectRatio="none" aria-label="Historial de GPU"></svg></button>
+<button class="card" data-key="battery"><div class="card-head"><span class="symbol">▰</span><span>BATERÍA</span><span class="tag" id="batteryTag">—</span></div><div class="metric"><span id="battery">—</span><small>% carga</small></div><div class="sub" id="batterySub">Leyendo batería</div><div class="health-line" id="batteryHealth">Salud: consultando…</div><div class="meter"><div id="batteryMeter"></div></div></button>
+<button class="card" data-key="temp"><div class="card-head"><span class="symbol">♨</span><span>TEMPERATURA</span></div><div class="metric"><span id="temp">—</span><small>°C</small></div><div class="sub" id="tempSub">Buscando sensores</div><div class="thermal-caption" id="tempStatus">Máxima detectada</div></button>
+</div>
+<div class="machine"><span class="machine-dot"></span><span id="machineName">Equipo Windows</span><span class="machine-spec" id="machineSpec">Detectando hardware</span></div>
+</div>
+<aside id="details"><div class="detail-heading"><span class="eyebrow">MÁS CERCA DEL HARDWARE</span><h2>Lecturas del sistema</h2><p>Datos reales. Los sensores no disponibles se indican sin estimaciones.</p></div><div id="detailContent"><p class="muted">Esperando primera lectura…</p></div></aside>
+</div>
+<section id="historyPanel" class="workspace" hidden>
+<div class="panel-heading"><div><div class="eyebrow">LOS DATOS SE QUEDAN CONTIGO</div><h2>Historial del equipo</h2></div><select id="historyRange" aria-label="Periodo del historial"><option value="1h">Última hora</option><option value="24h" selected>Últimas 24 horas</option><option value="7d">Últimos 7 días</option><option value="30d">Últimos 30 días</option></select></div>
+<p class="panel-note" id="historySummary">Cargando registros locales…</p><div class="history-grid" id="historyCharts"></div>
+<div class="panel-heading battery-heading"><h3>Evolución de la salud de batería</h3><button id="exportHistory" class="action-button">Exportar CSV ↗</button></div><div id="batteryTrend"></div>
+<p class="panel-note">Se registra mientras Pulse está abierto, aproximadamente cada 15 s. Métricas: 30 días; salud diaria de batería: 1 año. Los intervalos sin registros quedan como huecos.</p>
+</section>
+<section id="diagnosticsPanel" class="workspace" hidden>
+<div class="panel-heading"><div><div class="eyebrow">UNA REVISIÓN CON EVIDENCIA</div><h2>Diagnósticos</h2></div><button id="runDiagnostics" class="action-button primary">Correr diagnóstico</button></div>
+<p class="panel-note">Revisa batería, memoria disponible, almacenamiento y eventos de hardware de los últimos 7 días. Sin pruebas de estrés ni reinicios.</p>
+<div id="diagnosticStatus" role="status">Todavía no se ha corrido un diagnóstico.</div><div id="diagnosticResults"></div>
+<div class="report-actions"><button id="openReport" class="action-button" disabled>Abrir último reporte ↗</button><button id="openReports" class="action-button">Ver reportes guardados ↗</button><button id="openData" class="action-button">Carpeta de datos ↗</button></div>
+</section>
+</main>
+<footer><span class="status-dot"></span><span id="updated">Iniciando sensores…</span><div class="footer-actions"><button id="expand" title="Ampliar monitor">Ampliar ↗</button><button id="settings" title="Opciones" aria-label="Opciones">⚙</button></div></footer>
+<div id="options" hidden><div class="options-title">A tu manera<button id="closeOptions" aria-label="Cerrar opciones">×</button></div><button id="startup"><span>Iniciar con Windows</span><span id="startupState">Desactivado</span></button><button id="admin"><span>Activar sensores avanzados</span><span>Permiso de Windows ↗</span></button><p id="adminHelp">Algunos sensores necesitan permisos de administrador. Windows te pedirá confirmación.</p><div class="privacy">100 % local · Sin cuenta ni conexión a internet</div></div>
+<div id="toast" role="status" hidden></div>
+<script src="app.js"></script>
+<script src="features.js"></script>
+</body></html>

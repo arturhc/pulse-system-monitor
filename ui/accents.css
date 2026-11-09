@@ -1,0 +1,6 @@
+.card[data-key="cpu"]{--accent:#c2b4fc}
+.card[data-key="ram"]{--accent:#87d9c6}
+.card[data-key="ssd"]{--accent:#99c6fa}
+.card[data-key="gpu"]{--accent:#f2b39f}
+.card[data-key="battery"]{--accent:#c5ec9c}
+.card[data-key="temp"]{--accent:#efcf87}
